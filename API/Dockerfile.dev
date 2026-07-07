@@ -1,0 +1,14 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0
+
+WORKDIR /src
+
+# فقط copy csproj برای cache (اختیاری ولی خوبه)
+COPY API/API.csproj API/
+COPY Application/Application.csproj Application/
+COPY Domain/Domain.csproj Domain/
+COPY Infrastructure/Infrastructure.csproj Infrastructure/
+
+RUN dotnet restore API/API.csproj
+
+# کل سورس از volume میاد، اینجا فقط entry
+CMD ["dotnet", "watch", "--project", "API/API.csproj", "run", "--urls=http://0.0.0.0:8080"]

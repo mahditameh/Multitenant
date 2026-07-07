@@ -1,0 +1,18 @@
+@API_HostAddress = http://localhost:5037
+
+POST {{API_HostAddress}}/api/orders
+Content-Type: application/json
+X-Tenant-ID: tenant-a
+
+{
+  "customerName": "Ali",
+  "totalAmount": 125000
+}
+
+###
+
+GET {{API_HostAddress}}/api/orders
+Accept: application/json
+X-Tenant-ID: tenant-a
+
+###

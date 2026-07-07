@@ -1,0 +1,21 @@
+services:
+
+  api:
+    build:
+      context: .
+      dockerfile: API/Dockerfile.dev
+
+    volumes:
+      - .:/src
+
+    working_dir: /src
+
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=orderdb;Username=admin;Password=pass123
+
+    ports:
+      - "5000:8080"
+
+    command: dotnet watch --project API/API.csproj run --urls=http://0.0.0.0:8080
